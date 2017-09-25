@@ -11,7 +11,8 @@ class CalendarHeader extends Component {
       PropTypes.object,
       PropTypes.number
     ]),
-    datesForWeek: PropTypes.array.isRequired
+    datesForWeek: PropTypes.array.isRequired,
+    calenderHeaderOnPress: PropTypes.func
   };
 
   shouldComponentUpdate(nextProps) {
@@ -70,8 +71,9 @@ class CalendarHeader extends Component {
           { fontSize: this.props.fontSize },
           this.props.calendarHeaderStyle
         ]}
+        onPress={this.props.calenderHeaderOnPress}
       >
-        Ridge Robinson {headerText}
+        {headerText}
       </Text>
     );
   }
