@@ -71,7 +71,7 @@ class CalendarHeader extends Component {
           this.props.calendarHeaderStyle
         ]}
       >
-        Ridge Robinson{headerText}
+        Ridge Robinson {headerText}
       </Text>
     );
   }
