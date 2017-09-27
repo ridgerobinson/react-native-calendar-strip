@@ -4,6 +4,8 @@ import { Text } from "react-native";
 
 import styles from "./Calendar.style.js";
 
+import moment from 'moment';
+
 class CalendarHeader extends Component {
   static propTypes = {
     calendarHeaderFormat: PropTypes.string.isRequired,
@@ -21,7 +23,7 @@ class CalendarHeader extends Component {
 
   //Function that formats the calendar header
   //It also formats the month section if the week is in between months
-  formatCalendarHeader(datesForWeek, calendarHeaderFormat) {
+  formatDayCalendarHeader(datesForWeek, calendarHeaderFormat) {
     if (!datesForWeek || datesForWeek.length === 0) {
       return "";
     }
@@ -59,11 +61,31 @@ class CalendarHeader extends Component {
     )}`;
   }
 
+  formatWeekCalendarHeader(selectedDate) {    
+    let firstDate = moment(selectedDate).clone().startOf('isoWeek');
+    let endDate = moment(selectedDate).clone().endOf('isoWeek');
+
+    let firstDateYear = moment(firstDate).year();
+    let endDateYear = moment(endDate).year();
+
+    let withYear = 'MMM Do, YYYY';
+    let withoutYear = 'MMM Do';
+
+    return `${moment(firstDate).format(firstDateYear == endDateYear ? withoutYear:withYear)} - ${moment(endDate).format(withYear)}`;
+  }
+
   render() {
-    const headerText = this.formatCalendarHeader(
+
+    const headerText = this.props.calendarView == 'day' ?
+      this.formatDayCalendarHeader(
       this.props.datesForWeek,
       this.props.calendarHeaderFormat
+    )
+      :
+    this.formatWeekCalendarHeader(
+      this.props.selectedDate
     );
+
     return (
       <Text
         style={[
