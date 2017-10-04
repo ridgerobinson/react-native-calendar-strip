@@ -194,7 +194,7 @@ export default class CalendarDay extends Component {
     let responsiveDateContainerStyle = {
       width: this.state.containerSize,
       height: this.state.containerSize,
-      borderRadius: this.state.containerBorderRadius,
+      borderRadius: 0,
       padding: this.state.containerPadding
     };
 
